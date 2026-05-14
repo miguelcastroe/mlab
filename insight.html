@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>M/LAB — Insight</title>
+<meta name="description" content="M/Lab — A living paper for keeping judgment alive in AI-assisted work." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>*{margin:0;padding:0;box-sizing:border-box}
+
+:root{
+  --bg:#fafafa;
+  --ink:#111;
+  --muted:#767676;
+  --line:#dcdcdc;
+  --hover:#f1f1f1;
+  --sans:"Inter", Arial, Helvetica, sans-serif;
+  --mono:"IBM Plex Mono","Courier New",monospace;
+}
+
+html,body{
+  min-height:100%;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:var(--sans);
+  -webkit-font-smoothing:antialiased;
+  text-rendering:geometricPrecision;
+}
+
+body{
+  font-size:14px;
+  line-height:1.4;
+}
+
+::selection{
+  background:var(--ink);
+  color:var(--bg);
+}
+
+a{
+  color:inherit;
+  text-decoration:none;
+}
+
+.site{
+  width:100%;
+  min-height:100vh;
+  display:grid;
+  grid-template-rows:auto 1fr auto;
+}
+
+.header{
+  padding:22px 24px 0;
+}
+
+.top{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:24px;
+  margin-bottom:54px;
+}
+
+.brand{
+  font-family:var(--mono);
+  font-size:10px;
+  line-height:1.3;
+  letter-spacing:0;
+  font-weight:400;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+
+.brand:hover{
+  color:var(--ink);
+}
+
+.brand sup{
+  font-size:6px;
+  vertical-align:super;
+  margin-left:1px;
+}
+
+.links{
+  display:flex;
+  gap:18px;
+  align-items:center;
+  font-family:var(--mono);
+  font-size:10px;
+  line-height:1.3;
+  color:var(--muted);
+  text-transform:uppercase;
+}
+
+.links a:hover{
+  color:var(--ink);
+}
+
+.intro{
+  max-width:920px;
+  margin-bottom:58px;
+  padding:0 24px;
+}
+
+.kicker{
+  font-family:var(--mono);
+  font-size:10px;
+  line-height:1.45;
+  color:var(--muted);
+  text-transform:uppercase;
+  margin-bottom:18px;
+}
+
+h1{
+  font-size:clamp(30px,4.2vw,52px);
+  line-height:1.08;
+  letter-spacing:-0.018em;
+  font-weight:300;
+  margin-bottom:18px;
+}
+
+.description{
+  max-width:650px;
+  font-size:15px;
+  line-height:1.55;
+  color:var(--muted);
+}
+
+.list{
+  border-top:1px solid var(--line);
+}
+
+.list-head{
+  display:grid;
+  grid-template-columns:72px minmax(0,1fr) 28px;
+  gap:18px;
+  padding:12px 24px;
+  border-bottom:1px solid var(--line);
+  font-family:var(--mono);
+  font-size:10px;
+  line-height:1.4;
+  color:var(--muted);
+  text-transform:uppercase;
+}
+
+.list-head-main{
+  grid-column:2;
+  display:grid;
+  grid-template-columns:minmax(150px,240px) minmax(0,1fr);
+  gap:28px;
+  align-items:center;
+}
+
+.item{
+  display:grid;
+  grid-template-columns:72px minmax(0,1fr) 28px;
+  gap:18px;
+  align-items:center;
+  min-height:82px;
+  padding:16px 24px;
+  border-bottom:1px solid var(--line);
+}
+
+.item:hover{
+  background:var(--hover);
+}
+
+.num{
+  font-family:var(--mono);
+  font-size:12px;
+  color:var(--muted);
+}
+
+.item-main{
+  display:grid;
+  grid-template-columns:minmax(150px,240px) minmax(0,1fr);
+  gap:28px;
+  align-items:center;
+}
+
+.name{
+  font-size:clamp(21px,2.8vw,30px);
+  line-height:1.04;
+  letter-spacing:-0.018em;
+  font-weight:300;
+}
+
+.meta{
+  font-family:var(--mono);
+  font-size:10px;
+  line-height:1.45;
+  color:var(--muted);
+  text-transform:uppercase;
+  align-self:center;
+}
+
+.arrow{
+  font-family:var(--mono);
+  font-size:16px;
+  line-height:1;
+  color:var(--muted);
+  text-align:right;
+}
+
+.node{
+  padding:0 24px 80px;
+  max-width:960px;
+}
+
+.node-head{
+  margin-bottom:54px;
+}
+
+.node-num{
+  font-family:var(--mono);
+  font-size:10px;
+  line-height:1.45;
+  color:var(--muted);
+  text-transform:uppercase;
+  margin-bottom:18px;
+}
+
+.node-title{
+  font-size:clamp(34px,5.2vw,60px);
+  line-height:1.02;
+  letter-spacing:-0.025em;
+  font-weight:300;
+  margin-bottom:14px;
+}
+
+.node-subtitle{
+  max-width:650px;
+  font-size:16px;
+  line-height:1.55;
+  color:var(--muted);
+}
+
+.node-table{
+  border-top:1px solid var(--line);
+  max-width:900px;
+}
+
+.node-row{
+  display:grid;
+  grid-template-columns:120px minmax(0,1fr);
+  gap:36px;
+  padding:20px 0;
+  border-bottom:1px solid var(--line);
+}
+
+.node-label{
+  font-family:var(--mono);
+  font-size:10px;
+  line-height:1.45;
+  color:var(--muted);
+  text-transform:uppercase;
+}
+
+.node-value{
+  max-width:680px;
+  font-size:15px;
+  line-height:1.66;
+}
+
+.node-value.mono{
+  font-family:var(--mono);
+  font-size:12px;
+  line-height:1.62;
+}
+
+.copy{
+  display:inline-flex;
+  align-items:center;
+  margin-top:14px;
+  padding:0;
+  border:0;
+  background:transparent;
+  font-family:var(--mono);
+  font-size:10px;
+  line-height:1.3;
+  color:var(--muted);
+  text-transform:uppercase;
+  cursor:pointer;
+  appearance:none;
+  -webkit-appearance:none;
+}
+
+.copy::before{
+  content:"";
+  width:8px;
+  height:8px;
+  margin-right:7px;
+  border:1px solid var(--muted);
+  display:inline-block;
+}
+
+.copy:hover{
+  color:var(--ink);
+}
+
+.copy:hover::before{
+  border-color:var(--ink);
+}
+
+.footer{
+  display:flex;
+  justify-content:space-between;
+  gap:18px;
+  padding:22px 24px;
+  font-family:var(--mono);
+  font-size:10px;
+  line-height:1.4;
+  color:var(--muted);
+  text-transform:uppercase;
+}
+
+@media(max-width:720px){
+  .header{
+    padding:20px 18px 0;
+  }
+
+  .top{
+    display:block;
+    margin-bottom:44px;
+  }
+
+  .links{
+    margin-top:14px;
+  }
+
+  .intro{
+    margin-bottom:46px;
+    padding:0 18px;
+  }
+
+  h1{
+    font-size:31px;
+    line-height:1.1;
+    letter-spacing:-0.012em;
+  }
+
+  .description{
+    font-size:14px;
+  }
+
+  .list-head{
+    grid-template-columns:42px minmax(0,1fr) 22px;
+    gap:12px;
+    padding:10px 18px;
+  }
+
+  .list-head-main{
+    grid-column:2;
+    grid-template-columns:1fr;
+    gap:2px;
+  }
+
+  .list-head-main div:nth-child(2){
+    display:none;
+  }
+
+  .item{
+    grid-template-columns:42px minmax(0,1fr) 22px;
+    gap:12px;
+    min-height:82px;
+    padding:16px 18px;
+  }
+
+  .item-main{
+    grid-template-columns:1fr;
+    gap:6px;
+    align-items:center;
+  }
+
+  .name{
+    font-size:23px;
+    letter-spacing:-0.012em;
+    font-weight:300;
+  }
+
+  .node{
+    padding:0 18px 64px;
+  }
+
+  .node-title{
+    font-size:34px;
+    line-height:1.06;
+    letter-spacing:-0.02em;
+  }
+
+  .node-row{
+    grid-template-columns:1fr;
+    gap:8px;
+    padding:16px 0;
+  }
+
+  .footer{
+    display:block;
+    padding:20px 18px;
+  }
+
+  .footer span{
+    display:block;
+    margin-bottom:8px;
+  }
+}
+
+/* Global line rhythm guardrails */
+.footer{
+  border-top:1px solid var(--line);
+}
+
+main + .footer,
+.paper + .footer,
+.about + .footer,
+.node + .footer{
+  margin-top:18px;
+}
+
+.paper-section:last-child,
+.about-row:last-child,
+.node-row:last-child{
+  border-bottom:0 !important;
+}
+
+.simple-list .simple-item:last-child,
+.simple-list .reference:last-child{
+  border-bottom:0 !important;
+}
+
+@media(max-width:720px){
+  main + .footer,
+  .paper + .footer,
+  .about + .footer,
+  .node + .footer{
+    margin-top:14px;
+  }
+}
+
+</style>
+</head>
+<body>
+<div class="site">
+<header class="header">
+  <div class="top">
+    <a class="brand" href="index.html">M/LAB<sup>™</sup></a>
+    <nav class="links" aria-label="Navigation">
+      <a href="index.html">Index</a>
+      <a href="#">Paper</a>
+      <a href="mailto:miguel@miguelcastro.cc">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main class="node">
+  <section class="node-head">
+    <div class="node-num">03 / Node</div>
+    <h1 class="node-title">Insight</h1>
+    <p class="node-subtitle">Before language becomes decoration</p>
+  </section>
+
+  <section class="node-table">
+    <div class="node-row">
+      <div class="node-label">Summary</div>
+      <div class="node-value">Insight is not the moment when language becomes sharper. It is the moment when understanding changes. In AI-assisted work, a sentence can sound true before it has earned that truth. This node separates observation from recognition: what happened is not yet the insight; the insight is the human meaning that changes how the observation is understood.</div>
+    </div>
+
+    <div class="node-row">
+      <div class="node-label">Risk</div>
+      <div class="node-value">Fluent phrase mistaken for truth.</div>
+    </div>
+
+    <div class="node-row">
+      <div class="node-label">Practice</div>
+      <div class="node-value">Recognize what was not literal.</div>
+    </div>
+
+    <div class="node-row">
+      <div class="node-label">Output</div>
+      <div class="node-value">Human insight.</div>
+    </div>
+
+    <div class="node-row">
+      <div class="node-label">Applied bite</div>
+      <div class="node-value mono">
+        Start from the observation and look for the human truth beginning to appear. Do not look for a brilliant phrase. Look for a recognition: something that changes how the observation is understood.
+        <br><button class="copy" data-copy="Start from the observation and look for the human truth beginning to appear. Do not look for a brilliant phrase. Look for a recognition: something that changes how the observation is understood.">Copy</button>
+      </div>
+    </div>
+
+    <div class="node-row">
+      <div class="node-label">Related</div>
+      <div class="node-value">Klein / Kahneman & Klein</div>
+    </div>
+
+    <div class="node-row">
+      <div class="node-label">Back</div>
+      <div class="node-value"><a href="index.html">Return to index</a></div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <span>Built by Miguel Castro</span>
+  <span>Living paper / 2026</span>
+</footer>
+</div>
+<script>
+document.addEventListener("click", async function(e){
+  if(!e.target.classList.contains("copy")) return;
+  const text = e.target.getAttribute("data-copy") || "";
+  try {
+    await navigator.clipboard.writeText(text);
+    e.target.textContent = "Copied";
+    setTimeout(function(){ e.target.textContent = "Copy"; }, 1200);
+  } catch {}
+});
+</script>
+</body>
+</html>

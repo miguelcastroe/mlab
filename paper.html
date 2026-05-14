@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>M/LAB — Paper</title>
+<meta name="description" content="M/Lab — A living paper for keeping judgment alive in AI-assisted work." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+:root{
+  --bg:#fafafa;
+  --ink:#111;
+  --muted:#767676;
+  --line:#dcdcdc;
+  --hover:#f1f1f1;
+  --sans:"Inter", Arial, Helvetica, sans-serif;
+  --mono:"IBM Plex Mono","Courier New",monospace;
+}
+
+html,body{
+  min-height:100%;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:var(--sans);
+  -webkit-font-smoothing:antialiased;
+  text-rendering:geometricPrecision;
+}
+
+body{
+  font-size:14px;
+  line-height:1.4;
+}
+
+::selection{
+  background:var(--ink);
+  color:var(--bg);
+}
+
+a{
+  color:inherit;
+  text-decoration:none;
+}
+
+.site{
+  width:100%;
+  min-height:100vh;
+  display:grid;
+  grid-template-rows:auto 1fr auto;
+}
+
+.header{
+  padding:22px 24px 0;
+}
+
+.top{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:24px;
+  margin-bottom:54px;
+}
+
+.brand{
+  font-family:var(--mono);
+  font-size:10px;
+  line-height:1.3;
+  letter-spacing:0;
+  font-weight:400;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+
+.brand:hover{
+  color:var(--ink);
+}
+
+.brand sup{
+  font-size:6px;
+  vertical-align:super;
+  margin-left:1px;
+}
+
+.links{
+  display:flex;
+  gap:18px;
+  align-items:center;
+  font-family:var(--mono);
+  font-size:10px;
+  line-height:1.3;
+  color:var(--muted);
+  text-transform:uppercase;
+}
+
+.links a:hover{
+  color:var(--ink);
+}
+
+.paper{
+  width:100%;
+  max-width:820px;
+  margin:0 auto;
+  padding:0 24px 96px;
+}
+
+.paper-head{
+  margin-bottom:54px;
+}
+
+.paper-kicker{
+  font-family:var(--mono);
+  font-size:10px;
+  line-height:1.45;
+  color:var(--muted);
+  text-transform:uppercase;
+  margin-bottom:18px;
+}
+
+.paper-title{
+  font-size:clamp(34px,5vw,56px);
+  line-height:1.06;
+  letter-spacing:-0.02em;
+  font-weight:300;
+  margin-bottom:18px;
+}
+
+.paper-subtitle{
+  max-width:680px;
+  font-size:15px;
+  line-height:1.62;
+  color:var(--muted);
+}
+
+.paper-section{
+  padding:30px 0;
+  border-top:1px solid var(--line);
+}
+
+.paper-section:last-child{
+  border-bottom:1px solid var(--line);
+}
+
+.paper-label{
+  font-family:var(--mono);
+  font-size:10px;
+  line-height:1.45;
+  color:var(--muted);
+  text-transform:uppercase;
+  margin-bottom:18px;
+}
+
+.paper-section h2{
+  font-size:clamp(24px,3vw,34px);
+  line-height:1.12;
+  letter-spacing:-0.015em;
+  font-weight:300;
+  margin-bottom:16px;
+}
+
+.paper-section p{
+  font-size:15px;
+  line-height:1.7;
+  margin-bottom:14px;
+}
+
+.paper-section p:last-child{
+  margin-bottom:0;
+}
+
+.question{
+  font-size:clamp(21px,3vw,30px);
+  line-height:1.28;
+  letter-spacing:-0.012em;
+  font-weight:300;
+}
+
+.simple-list{
+  margin-top:16px;
+  border-top:1px solid var(--line);
+}
+
+.simple-item{
+  padding:16px 0;
+  border-bottom:1px solid var(--line);
+}
+
+.simple-item h3{
+  font-family:var(--mono);
+  font-size:10px;
+  line-height:1.45;
+  color:var(--muted);
+  text-transform:uppercase;
+  font-weight:400;
+  margin-bottom:8px;
+}
+
+.simple-item p{
+  font-size:14px;
+  line-height:1.65;
+  margin-bottom:0;
+}
+
+.reference{
+  padding:14px 0;
+  border-bottom:1px solid var(--line);
+}
+
+.reference:last-child{
+  border-bottom:0;
+}
+
+.reference h3{
+  font-family:var(--mono);
+  font-size:10px;
+  line-height:1.45;
+  color:var(--muted);
+  text-transform:uppercase;
+  font-weight:400;
+  margin-bottom:8px;
+}
+
+.reference p{
+  font-size:13px;
+  line-height:1.6;
+  margin-bottom:0;
+}
+
+.footer{
+  border-top:1px solid var(--line);
+  display:flex;
+  justify-content:space-between;
+  gap:18px;
+  padding:22px 24px;
+  font-family:var(--mono);
+  font-size:10px;
+  line-height:1.4;
+  color:var(--muted);
+  text-transform:uppercase;
+}
+
+@media(max-width:720px){
+  .header{
+    padding:20px 18px 0;
+  }
+
+  .top{
+    display:block;
+    margin-bottom:44px;
+  }
+
+  .links{
+    margin-top:14px;
+  }
+
+  .paper{
+    padding:0 18px 72px;
+    max-width:100%;
+  }
+
+  .paper-head{
+    margin-bottom:42px;
+  }
+
+  .paper-title{
+    font-size:34px;
+    line-height:1.08;
+    letter-spacing:-0.018em;
+  }
+
+  .paper-section{
+    padding:24px 0;
+  }
+
+  .paper-section p{
+    font-size:14px;
+    line-height:1.72;
+  }
+
+  .question{
+    font-size:21px;
+    line-height:1.34;
+  }
+
+  .footer{
+    display:block;
+    padding:20px 18px;
+  }
+
+  .footer span{
+    display:block;
+    margin-bottom:8px;
+  }
+}
+
+
+/* Typography-led paper rhythm */
+.paper-section{
+  border-top:0;
+  padding:40px 0 44px;
+}
+
+.paper-section + .paper-section{
+  border-top:0;
+}
+
+.paper-label{
+  margin-bottom:20px;
+}
+
+.paper-section h2{
+  margin-bottom:18px;
+}
+
+.paper-section::before{
+  content:"";
+  display:block;
+  width:42px;
+  height:1px;
+  background:var(--line);
+  margin-bottom:28px;
+}
+
+.paper-head + .paper-section::before{
+  width:0;
+  height:0;
+  margin:0;
+}
+
+.simple-list{
+  border-top:0;
+  margin-top:24px;
+}
+
+.simple-item,
+.reference{
+  border-bottom:0;
+  padding:12px 0 18px;
+}
+
+.simple-item + .simple-item,
+.reference + .reference{
+  border-top:1px solid var(--line);
+}
+
+.footer{
+  margin-top:24px;
+}
+
+@media(max-width:720px){
+  .paper-section{
+    padding:34px 0 38px;
+  }
+
+  .paper-section::before{
+    width:34px;
+    margin-bottom:24px;
+  }
+
+  .simple-list{
+    margin-top:20px;
+  }
+
+  .simple-item,
+  .reference{
+    padding:12px 0 16px;
+  }
+}
+
+
+
+/* Global line rhythm guardrails */
+.footer{
+  border-top:1px solid var(--line);
+}
+
+main + .footer,
+.paper + .footer,
+.about + .footer,
+.node + .footer{
+  margin-top:18px;
+}
+
+.paper-section:last-child,
+.about-row:last-child,
+.node-row:last-child{
+  border-bottom:0 !important;
+}
+
+.simple-list .simple-item:last-child,
+.simple-list .reference:last-child{
+  border-bottom:0 !important;
+}
+
+@media(max-width:720px){
+  main + .footer,
+  .paper + .footer,
+  .about + .footer,
+  .node + .footer{
+    margin-top:14px;
+  }
+}
+
+</style>
+</head>
+
+<body>
+<div class="site">
+<header class="header">
+  <div class="top">
+    <a class="brand" href="index.html">M/LAB<sup>™</sup></a>
+    <nav class="links" aria-label="Navigation">
+      <a href="index.html">Index</a>
+      <a href="paper.html">Paper</a>
+      <a href="about.html">About</a>
+      <a href="mailto:miguel@miguelcastro.cc">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main class="paper">
+  <section class="paper-head">
+    <div class="paper-kicker">Paper / v0.2</div>
+    <h1 class="paper-title">Judgment before output</h1>
+    <p class="paper-subtitle">A living paper on the conditions of judgment in AI-assisted creative and strategic work.</p>
+  </section>
+
+  <section class="paper-section">
+    <div class="paper-label">Abstract</div>
+    <p>M/Lab is a living paper on judgment in AI-assisted work.</p>
+    <p>It argues that generative AI does not merely accelerate creative and strategic work. It changes the conditions under which judgment is formed.</p>
+    <p>The central shift is from formulation before output to evaluation after output. AI systems can summarize before users have fully attended to the material, generate language before users have fully understood the issue, and offer structure before users have decided what matters.</p>
+    <p>This shift can be useful, but it can also reduce the opportunity to practice the operations through which judgment develops.</p>
+  </section>
+
+  <section class="paper-section">
+    <div class="paper-label">Research question</div>
+    <p class="question">What happens to judgment when AI systems can produce fluent answers before humans have finished forming meaningful questions?</p>
+    <p>The question is not whether AI can generate useful outputs. It can. The question is whether repeated exposure to fluent outputs changes the user’s role in the work: from forming judgment before output to evaluating machine-generated possibilities after output.</p>
+  </section>
+
+  <section class="paper-section">
+    <div class="paper-label">Core claim</div>
+    <p>Generative AI does not simply accelerate work. It relocates cognitive effort.</p>
+    <p>The central concern is not that AI replaces human thought in a simple or total way. The concern is that repeated reliance on fluent outputs may reduce the user’s opportunity to practice the discriminating operations through which judgment is formed.</p>
+    <p>M/Lab therefore focuses on the stages that precede output: attention, framing, recognition, strategic direction, narrative reconstruction, and argumentation.</p>
+  </section>
+
+  <section class="paper-section">
+    <div class="paper-label">Contribution</div>
+    <p>This paper contributes a practice-oriented framework for examining judgment in AI-assisted creative and strategic work.</p>
+    <p>First, it reframes the risk of AI-assisted work as a shift from judgment formation to output evaluation. Second, it identifies six recurring compression points where AI-assisted work can reduce the user’s opportunity to practice judgment. Third, it proposes six corresponding practices designed to keep judgment active before output becomes persuasive.</p>
+  </section>
+
+  <section class="paper-section">
+    <div class="paper-label">Definitions</div>
+
+    <div class="simple-list">
+      <div class="simple-item">
+        <h3>Judgment</h3>
+        <p>The discriminating function within thought: the capacity to decide what matters, what is missing, what should be rejected, and what deserves further development.</p>
+      </div>
+
+      <div class="simple-item">
+        <h3>Cognitive friction</h3>
+        <p>The productive difficulty that slows premature closure.</p>
+      </div>
+
+      <div class="simple-item">
+        <h3>Fluency</h3>
+        <p>The feeling that something is easy to process. In AI-assisted work, fluency can make an answer feel more complete or trustworthy than it actually is.</p>
+      </div>
+
+      <div class="simple-item">
+        <h3>Cognitive delegation</h3>
+        <p>The transfer of mental work from the human to the system. It becomes risky when users delegate not only tasks, but judgment itself.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="paper-section">
+    <div class="paper-label">Framework</div>
+    <p>The six dimensions correspond to recurring stages where judgment is often formed before output.</p>
+
+    <div class="simple-list">
+      <div class="simple-item">
+        <h3>Signal</h3>
+        <p>Seeing. Summary before attention. Practice: look before interpreting.</p>
+      </div>
+
+      <div class="simple-item">
+        <h3>Invisible</h3>
+        <p>Framing. Obvious problems dressed as invisible ones. Practice: identify what has been normalized.</p>
+      </div>
+
+      <div class="simple-item">
+        <h3>Insight</h3>
+        <p>Recognizing. A fluent phrase mistaken for a human truth. Practice: distinguish observation from recognition.</p>
+      </div>
+
+      <div class="simple-item">
+        <h3>Tension</h3>
+        <p>Directing. A clean opposition mistaken for real tension. Practice: find where the insight creates friction.</p>
+      </div>
+
+      <div class="simple-item">
+        <h3>Case</h3>
+        <p>Narrating. The result rewriting the idea. Practice: reconstruct the idea before the result.</p>
+      </div>
+
+      <div class="simple-item">
+        <h3>Deck</h3>
+        <p>Arguing. Structure mistaken for argument. Practice: turn structure into argument.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="paper-section">
+    <div class="paper-label">Conceptual background</div>
+    <p>Automation studies help frame how systems can weaken human readiness even when humans remain formally in control. Cognitive psychology helps explain why fluency, coherence, and ease of processing can produce premature trust.</p>
+    <p>Work on insight, intuition, tension, and reflective practice helps position judgment as something developed through action, resistance, feedback, and interpretation.</p>
+    <p>Taken together, these sources suggest that the risk of AI-assisted work is not only incorrect output. The deeper risk is the erosion of the conditions under which judgment is practiced.</p>
+  </section>
+
+  <section class="paper-section">
+    <div class="paper-label">Method</div>
+    <p>This living paper was developed through applied work with generative AI across creative strategy, conceptual prototyping, case development, deck narratives, and research systems.</p>
+    <p>Its method is reflective practice: repeated use, observation of recurring failure modes, comparison with cognitive and design literature, development of reusable applied practices, and iterative refinement through writing, testing, and critique.</p>
+  </section>
+
+  <section class="paper-section">
+    <div class="paper-label">Limits</div>
+    <p>This paper does not argue against AI use. It argues against unexamined cognitive delegation.</p>
+    <p>It does not claim that all AI-assisted work weakens judgment. It claims that judgment weakens when the user repeatedly accepts fluency, structure, and speed as substitutes for seeing, deciding, recognizing, and arguing.</p>
+    <p>The goal is not to slow everything down. The goal is to know what should not be accelerated too early.</p>
+  </section>
+
+  <section class="paper-section">
+    <div class="paper-label">References</div>
+
+    <div class="simple-list">
+      <div class="reference">
+        <h3>Bainbridge, 1983</h3>
+        <p>Bainbridge, L. (1983). Ironies of automation. Automatica.</p>
+      </div>
+
+      <div class="reference">
+        <h3>Bender et al., 2021</h3>
+        <p>Bender, E. M., Gebru, T., McMillan-Major, A., & Shmitchell, S. (2021). On the dangers of stochastic parrots: Can language models be too big? Proceedings of FAccT.</p>
+      </div>
+
+      <div class="reference">
+        <h3>Bjork, 1994</h3>
+        <p>Bjork, R. A. (1994). Memory and metamemory considerations in the training of human beings. In J. Metcalfe & A. Shimamura (Eds.), Metacognition: Knowing about knowing.</p>
+      </div>
+
+      <div class="reference">
+        <h3>Kahneman, 2011</h3>
+        <p>Kahneman, D. (2011). Thinking, Fast and Slow. Farrar, Straus and Giroux.</p>
+      </div>
+
+      <div class="reference">
+        <h3>Kahneman & Klein, 2009</h3>
+        <p>Kahneman, D., & Klein, G. (2009). Conditions for intuitive expertise: A failure to disagree. American Psychologist.</p>
+      </div>
+
+      <div class="reference">
+        <h3>Klayman & Ha, 1987</h3>
+        <p>Klayman, J., & Ha, Y. W. (1987). Confirmation, disconfirmation, and information in hypothesis testing. Psychological Review.</p>
+      </div>
+
+      <div class="reference">
+        <h3>Klein, 2013</h3>
+        <p>Klein, G. (2013). Seeing What Others Don’t: The Remarkable Ways We Gain Insights. PublicAffairs.</p>
+      </div>
+
+      <div class="reference">
+        <h3>Martin, 2007</h3>
+        <p>Martin, R. (2007). The Opposable Mind: How Successful Leaders Win Through Integrative Thinking. Harvard Business School Press.</p>
+      </div>
+
+      <div class="reference">
+        <h3>Nickerson, 1998</h3>
+        <p>Nickerson, R. S. (1998). Confirmation bias: A ubiquitous phenomenon in many guises. Review of General Psychology.</p>
+      </div>
+
+      <div class="reference">
+        <h3>Parasuraman & Manzey, 2010</h3>
+        <p>Parasuraman, R., & Manzey, D. H. (2010). Complacency and bias in human use of automation: An attentional integration. Human Factors.</p>
+      </div>
+
+      <div class="reference">
+        <h3>Reber et al., 2004</h3>
+        <p>Reber, R., Schwarz, N., & Winkielman, P. (2004). Processing fluency and aesthetic pleasure: Is beauty in the perceiver’s processing experience? Personality and Social Psychology Review.</p>
+      </div>
+
+      <div class="reference">
+        <h3>Schön, 1983</h3>
+        <p>Schön, D. A. (1983). The Reflective Practitioner: How Professionals Think in Action. Basic Books.</p>
+      </div>
+
+      <div class="reference">
+        <h3>Senge, 1990</h3>
+        <p>Senge, P. M. (1990). The Fifth Discipline: The Art and Practice of the Learning Organization. Doubleday.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <span>Built by Miguel Castro</span>
+  <span>Living paper / 2026</span>
+</footer>
+</div>
+</body>
+</html>
