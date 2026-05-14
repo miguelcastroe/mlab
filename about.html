@@ -600,37 +600,6 @@ h1{
   }
 
 
-.author-image-placeholder{
-  width:100%;
-  max-width:360px;
-  aspect-ratio:3/4;
-  margin:0 0 56px;
-  border:1px solid var(--line);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-family:var(--mono);
-  font-size:10px;
-  line-height:1.45;
-  color:var(--muted);
-  text-transform:uppercase;
-  background:transparent;
-}
-
-.author-image-placeholder span{
-  display:block;
-  padding:18px;
-  text-align:center;
-}
-
-@media(max-width:720px){
-  .author-image-placeholder{
-    max-width:260px;
-    margin-bottom:42px;
-  }
-}
-
-
 /* Global line rhythm guardrails */
 .footer{
   border-top:1px solid var(--line);
@@ -663,6 +632,24 @@ main + .footer,
   }
 }
 
+
+.author-image{
+  width:100%;
+  max-width:360px;
+  aspect-ratio:3/4;
+  margin:0 0 56px;
+  display:block;
+  object-fit:cover;
+  filter:grayscale(100%);
+}
+
+@media(max-width:720px){
+  .author-image{
+    max-width:260px;
+    margin-bottom:42px;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -686,9 +673,7 @@ main + .footer,
     <p class="about-subtitle">M/Lab is a living paper and index for AI-assisted judgment.</p>
   </section>
 
-  <section class="author-image-placeholder" aria-label="Author image placeholder">
-    <span>Image path placeholder<br>Paste image route here</span>
-  </section>
+  <img class="author-image" src="miguel-castro.jpg" alt="Miguel Castro">
 
   <section class="about-table">
     <div class="about-row">
